@@ -6,7 +6,7 @@ export default function HomePage() {
       id: 1,
       title: 'Rendimiento por Curso',
       description: 'Análisis de promedios, aprobación y reprobación por curso y periodo',
-      href: '/reports/course-performance',
+      href: '/reports/course',
       icon: '📊',
       color: 'bg-blue-50 border-blue-200',
     },
@@ -14,7 +14,7 @@ export default function HomePage() {
       id: 2,
       title: 'Carga Docente',
       description: 'Grupos, alumnos y promedios por docente en cada periodo',
-      href: '/reports/teacher-load',
+      href: '/reports/teacher',
       icon: '👨‍🏫',
       color: 'bg-green-50 border-green-200',
     },
@@ -22,7 +22,7 @@ export default function HomePage() {
       id: 3,
       title: 'Estudiantes en Riesgo',
       description: 'Identificación de alumnos con bajo rendimiento o asistencia',
-      href: '/reports/students-at-risk',
+      href: '/reports/students',
       icon: '⚠️',
       color: 'bg-red-50 border-red-200',
     },
@@ -30,7 +30,7 @@ export default function HomePage() {
       id: 4,
       title: 'Asistencia por Grupo',
       description: 'Análisis de asistencia promedio por grupo y periodo',
-      href: '/reports/attendance-by-group',
+      href: '/reports/attendance',
       icon: '✓',
       color: 'bg-purple-50 border-purple-200',
     },
@@ -38,7 +38,7 @@ export default function HomePage() {
       id: 5,
       title: 'Ranking de Estudiantes',
       description: 'Clasificación de estudiantes por rendimiento académico',
-      href: '/reports/rank-students',
+      href: '/reports/RankStudents',
       icon: '🏆',
       color: 'bg-yellow-50 border-yellow-200',
     },
@@ -93,37 +93,8 @@ export default function HomePage() {
             </Link>
           ))}
         </div>
-
-        {/* Información adicional */}
-        <div className="mt-12 p-6 bg-white rounded-lg shadow border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900 mb-3">
-            Características del Sistema
-          </h3>
-          <ul className="space-y-2 text-sm text-gray-600">
-            <li className="flex items-start">
-              <span className="mr-2">✓</span>
-              <span>Conexión segura a PostgreSQL con usuario restringido (solo lectura en VIEWS)</span>
-            </li>
-            <li className="flex items-start">
-              <span className="mr-2">✓</span>
-              <span>Filtros validados con Zod y consultas parametrizadas</span>
-            </li>
-            <li className="flex items-start">
-              <span className="mr-2">✓</span>
-              <span>Paginación server-side para consultas eficientes</span>
-            </li>
-            <li className="flex items-start">
-              <span className="mr-2">✓</span>
-              <span>Índices optimizados para mejorar performance</span>
-            </li>
-            <li className="flex items-start">
-              <span className="mr-2">✓</span>
-              <span>Reportes con agregaciones SQL avanzadas (CTE, Window Functions, CASE)</span>
-            </li>
-          </ul>
-        </div>
       </main>
-
+      
       {/* Footer */}
       <footer className="bg-white border-t border-gray-200 mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
