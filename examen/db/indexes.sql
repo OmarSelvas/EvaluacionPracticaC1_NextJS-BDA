@@ -4,7 +4,7 @@ ON students USING gin (
     to_tsvector('spanish', name || ' ' || email)
 );
 
--- Índice alternativo para búsquedas con ILIKE
+-- Indice alternativo para búsquedas con ILIKE
 CREATE INDEX IF NOT EXISTS idx_students_name_lower 
 ON students (LOWER(name));
 CREATE INDEX IF NOT EXISTS idx_students_email_lower 
