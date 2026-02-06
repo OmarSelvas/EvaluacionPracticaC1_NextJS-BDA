@@ -22,7 +22,7 @@ services:
     build:
       context: .
       dockerfile: ./front/Dockerfile
-    container_name: lab_reportes_web
+    container_name: academic_web
     restart: always
     ports:
       - "3000:3000"

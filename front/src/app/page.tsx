@@ -7,7 +7,6 @@ export default function HomePage() {
       title: 'Rendimiento por Curso',
       description: 'Análisis de promedios, aprobación y reprobación por curso y periodo',
       href: '/reports/course',
-      icon: '📊',
       color: 'bg-blue-50 border-blue-200',
     },
     {
@@ -15,7 +14,6 @@ export default function HomePage() {
       title: 'Carga Docente',
       description: 'Grupos, alumnos y promedios por docente en cada periodo',
       href: '/reports/teacher',
-      icon: '👨‍🏫',
       color: 'bg-green-50 border-green-200',
     },
     {
@@ -23,7 +21,6 @@ export default function HomePage() {
       title: 'Estudiantes en Riesgo',
       description: 'Identificación de alumnos con bajo rendimiento o asistencia',
       href: '/reports/students',
-      icon: '⚠️',
       color: 'bg-red-50 border-red-200',
     },
     {
@@ -39,7 +36,6 @@ export default function HomePage() {
       title: 'Ranking de Estudiantes',
       description: 'Clasificación de estudiantes por rendimiento académico',
       href: '/reports/RankStudents',
-      icon: '🏆',
       color: 'bg-yellow-50 border-yellow-200',
     },
   ];
@@ -94,7 +90,7 @@ export default function HomePage() {
           ))}
         </div>
       </main>
-      
+
       {/* Footer */}
       <footer className="bg-white border-t border-gray-200 mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

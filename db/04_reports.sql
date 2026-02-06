@@ -1,6 +1,6 @@
-#1 
-## Esta vista sirve para saber donde reprueban mas los alumnos
-## y cuáles tienen mejor promedio
+--1 
+-- Esta vista sirve para saber donde reprueban mas los alumnos
+-- y cuáles tienen mejor promedio
 CREATE OR REPLACE VIEW vw_course_performance AS
 SELECT 
     c.id AS course_id,
@@ -25,8 +25,8 @@ LEFT JOIN grades gr ON e.id = gr.enrollment_id
 GROUP BY c.id, c.code, c.name, g.term, s.program
 ORDER BY g.term DESC, promedio_general DESC;
 
-#2 
-## Mide que tan cargado está un profesor
+--2 
+-- que tan cargado está un profesor
 CREATE OR REPLACE VIEW vw_teacher_load AS
 SELECT 
     t.id AS teacher_id,
@@ -46,8 +46,8 @@ GROUP BY t.id, t.name, t.email, g.term
 HAVING COUNT(DISTINCT g.id) >= 1  
 ORDER BY g.term DESC, total_alumnos DESC;
 
-#3
-## Identifica alumnos que necesitan ayuda
+--3
+-- Identifica alumnos que necesitan ayuda
 CREATE OR REPLACE VIEW vw_students_at_risk AS
 WITH student_performance AS (
     SELECT 
@@ -109,7 +109,7 @@ ORDER BY
     sp.promedio_final ASC;
 
 
-#4 analiza asistencia por grupo
+--4 analiza asistencia por grupo
 CREATE OR REPLACE VIEW vw_attendance_by_group AS
 SELECT 
     g.id AS group_id,
@@ -148,7 +148,7 @@ GROUP BY g.id, c.code, c.name, t.name, g.term
 HAVING COUNT(DISTINCT e.student_id) > 0  -- Solo grupos con estudiantes
 ORDER BY g.term DESC, asistencia_promedio_porcentaje ASC;
 
-#5 Ranking de estudiantes por programa y periodo
+--5 Ranking de estudiantes por programa y periodo
 CREATE OR REPLACE VIEW vw_rank_students AS
 WITH student_term_performance AS (
     SELECT 
