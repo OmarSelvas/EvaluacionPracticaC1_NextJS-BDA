@@ -1,0 +1,5 @@
+export interface CoursePerformance { periodo: string; nombre_curso: string; total_estudiantes: number; promedio_general: number | string; tasa_aprobacion_porcentaje: number | string; }
+export interface TeacherLoad { nombre_docente: string; email_docente: string; numero_grupos: number; total_alumnos: number; creditos_totales_impartidos: number; }
+export interface StudentRisk { nombre_estudiante: string; programa: string; promedio_final: number | string; porcentaje_asistencia: number | string; nivel_riesgo: string; }
+export interface AttendanceGroup { nombre_curso: string; nombre_docente: string; periodo: string; total_estudiantes: number; asistencia_promedio_porcentaje: number | string; estudiantes_buena_asistencia: number; estudiantes_mala_asistencia: number; }
+export interface StudentRanking { nombre_estudiante: string; email_estudiante: string; programa: string; promedio_periodo: number | string; materias_cursadas: number; posicion_programa: number; clasificacion_rendimiento: string; }
