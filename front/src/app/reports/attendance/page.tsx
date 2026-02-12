@@ -3,7 +3,7 @@ import { getAttendanceByGroup } from '@/services/reportservice';
 export const dynamic = 'force-dynamic';
 
 export default async function AttendancePage() {
-  const { data: reports } = await getAttendanceByGroup();
+      const { data: reports } = await getAttendanceByGroup();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-8">
