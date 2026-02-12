@@ -6,26 +6,57 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const getReport = async (req: any, res: any, view: string) => {
+const getReport = async (req: any, res: any, view: string, filterColumn?: string) => {
   try {
-    const { rows } = await pool.query(`SELECT * FROM ${view}`);
-    res.json(rows);
+    const { page = 1, limit = 10, search, term } = req.query;
+    const offset = (page - 1) * limit;
+    const params: any[] = [];
+    let query = `SELECT * FROM ${view}`;
+    let countQuery = `SELECT COUNT(*) FROM ${view}`;
+    let whereClauses = [];
+
+    if (term) {
+      params.push(term);
+      whereClauses.push(`periodo = $${params.length}`);
+    }
+
+    if (search && filterColumn) {
+      params.push(`%${search}%`);
+      whereClauses.push(`${filterColumn} ILIKE $${params.length}`);
+    }
+
+    if (whereClauses.length > 0) {
+      const where = ' WHERE ' + whereClauses.join(' AND ');
+      query += where;
+      countQuery += where;
+    }
+
+    query += ` LIMIT ${limit} OFFSET ${offset}`;
+
+    const dataResult = await pool.query(query, params);
+    const countResult = await pool.query(countQuery, params.slice(0, whereClauses.length));
+
+    res.json({
+      data: dataResult.rows,
+      pagination: {
+        total: parseInt(countResult.rows[0].count),
+        page: parseInt(page),
+        limit: parseInt(limit),
+        totalPages: Math.ceil(parseInt(countResult.rows[0].count) / limit)
+      }
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    res.status(500).json({ error: 'Error en servidor' });
   }
 };
 
 app.get('/api/reports/course', (req, res) => getReport(req, res, 'vw_course_performance'));
 app.get('/api/reports/teacher', (req, res) => getReport(req, res, 'vw_teacher_load'));
-app.get('/api/reports/students', (req, res) => getReport(req, res, 'vw_students_at_risk'));
+app.get('/api/reports/students', (req, res) => getReport(req, res, 'vw_students_at_risk', 'nombre_estudiante'));
 app.get('/api/reports/attendance', (req, res) => getReport(req, res, 'vw_attendance_by_group'));
-
 app.get('/api/reports/rank', async (req, res) => {
-  try {
-    const { rows } = await pool.query('SELECT * FROM vw_rank_students ORDER BY programa, posicion_programa');
-    res.json(rows);
-  } catch (err) { res.status(500).json(err); }
+  return getReport(req, res, 'vw_rank_students');
 });
 
-app.listen(4000, () => console.log('🚀 Backend corriendo en puerto 4000'));
+app.listen(4000, () => console.log('🚀 Backend AWOS (Con Paginación) listo en puerto 4000'));
